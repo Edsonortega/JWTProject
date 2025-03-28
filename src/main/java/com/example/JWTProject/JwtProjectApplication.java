@@ -19,7 +19,7 @@ public class JwtProjectApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(JwtProjectApplication.class, args);
-		System.out.println("Amo OP");
+		System.out.println("Love OP");
 	}
 
 	@Bean
