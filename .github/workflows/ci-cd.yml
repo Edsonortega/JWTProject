@@ -46,7 +46,4 @@ jobs:
       - name : Deploy to server
         run: |
           echo "Deploying to server..."
-          # Aquí irían los comandos para desplegar tu aplicación
-          # Por ejemplo, copiar el JAR a un servidor mediante SCP:
-          # scp target/JWTProject-0.0.1-SNAPSHOT.jar user@your-server:/path/to/deploy
           echo "Deployment completed"
