@@ -40,10 +40,14 @@ jobs:
           java-version: 21
           distribution: 'temurin'
 
-      - name: Build JAR
-        run: mvn clean package
+      - name: Build with Maven
+        run: mvn clean package -DskipTests
 
-      - name : Deploy to server
+      - name : Deploy to Heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
         run: |
-          echo "Deploying to server..."
-          echo "Deployment completed"
+          curl https://cli-assets.heroku.com/install.sh | sh
+          heroku plugins:install java
+          heroku deploy:jar target/*.jar --app $HEROKU_APP_NAME
