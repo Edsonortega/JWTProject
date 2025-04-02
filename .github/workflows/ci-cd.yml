@@ -43,17 +43,19 @@ jobs:
       - name: Build with Maven
         run: mvn clean package -DskipTests
   
-      - name: Deploy to Heroku
-        uses: akhileshns/heroku-deploy@v3.12.14
-        with:
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
-          heroku_email: ${{ secrets.HEROKU_EMAIL }}
-          justlogin: true
+      - name: Install Heroku CLI
+        run: |
+          curl https://cli-assets.heroku.com/install.sh | sh
   
-      - name: Deploy JAR file
+      - name: Deploy to Heroku
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+          HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
         run: |
+          heroku login -i <<EOF
+          $HEROKU_EMAIL
+          $HEROKU_API_KEY
+          EOF
           heroku plugins:install java
-          heroku deploy:jar target/*.jar --app ${{ secrets.HEROKU_APP_NAME }}
+          heroku deploy:jar target/*.jar --app $HEROKU_APP_NAME
