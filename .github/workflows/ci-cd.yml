@@ -48,6 +48,6 @@ jobs:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
           HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
         run: |
-          curl https://cli-assets.heroku.com/install.sh | sh
+          curl https://cli-assets.heroku.com/   install.sh | sh
           heroku plugins:install java
           heroku deploy:jar target/*.jar --app $HEROKU_APP_NAME

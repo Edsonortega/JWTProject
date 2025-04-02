@@ -1,0 +1,1 @@
+web: java -jar target/JWTProject-0.0.1-SNAPSHOT.jar
